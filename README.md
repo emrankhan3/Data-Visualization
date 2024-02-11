@@ -8,7 +8,7 @@ e.g: const anchor = d3.select("a");
 The above example finds the first anchor tag on the page and saves an HTML node for it in the variable anchor. You can use the selection with other methods. The d3 part of the example is a reference to the D3 object, which is how you access D3 methods.
 
 Two other useful methods are 
-*append()* and *text()*
+**append()** and **text()**
 
 The append() method takes an argument for the element you want to add to the document. It appends an HTML node to a selected item, and returns a handle to that node.
 The text() method either sets the text of the selected node, or gets the current text. To set the value, you pass a string as an argument inside the parentheses of the method.
