@@ -30,4 +30,30 @@ D3 allows you to chain several methods together with periods to perform a number
   </script>
 </body>
 ```
+## Select a Group of Elements with D3
+D3 also has the selectAll() method to select a group of elements.
+It returns an array of HTML nodes for all the items in the document that match the input string.
+```js
+const anchors = d3.selectAll("a");
+```
+Like the select() method, selectAll() supports method chaining, and you can use it with other methods.
 
+The code below select all of the li tags in the document, and change their text to the string list item by chaining the .text() method.
+```js
+  <body>
+    <ul>
+      <li>Example</li>
+      <li>Example</li>
+      <li>Example</li>
+    </ul>
+    <script>
+      // Add your code below this line
+      const anchor = d3.selectAll('li')
+      console.log(anchor)
+      anchor.text('list item')
+  
+  
+      // Add your code above this line
+    </script>
+  </body>
+```
