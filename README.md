@@ -102,3 +102,191 @@ Select the body node, then select all h2 elements. Have D3 create and append an 
 </body>
 
 
+
+
+
+
+## Add Inline Styling to Elements
+D3 lets you add inline CSS styles on dynamic elements with the style() method.
+
+The style() method takes a comma-separated key-value pair as an argument. Here's an example to set the selection's text color to blue:
+
+selection.style("color","blue");
+Add the style() method to the code in the editor to make all the displayed text have a font-family of verdana.
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    d3.select("body").selectAll("h2")
+      .data(dataset)
+      .enter()
+      .append("h2")
+      .text((d) => (d + " USD"))
+      .style('font-family','verdana')
+      // Add your code below this line
+
+
+
+      // Add your code above this line
+  </script>
+</body>
+
+
+
+-----------
+## Change Styles Based on Data
+D3 is about visualization and presentation of data. It's likely you'll want to change the styling of elements based on the data. For example, you may want to color a data point blue if it has a value less than 20, and red otherwise. You can use a callback function in the style() method and include the conditional logic. The callback function uses the d parameter to represent the data point:
+
+selection.style("color", (d) => {
+
+});
+The style() method is not limited to setting the color - it can be used with other CSS properties as well.
+
+Add the style() method to the code in the editor to set the color of the h2 elements conditionally. Write the callback function so if the data value is less than 20, it returns red, otherwise it returns green.
+
+Note: You can use if-else logic, or the ternary operator.
+
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    d3.select("body").selectAll("h2")
+      .data(dataset)
+      .enter()
+      .append("h2")
+      .text((d) => (d + " USD"))
+      // Add your code below this line
+
+      .style('color',(d)=>{
+        return d<20?'red':'green'
+      })
+
+      // Add your code above this line
+  </script>
+</body>
+----------------------
+
+## Add Classes with D3
+Using a lot of inline styles on HTML elements gets hard to manage, even for smaller apps. It's easier to add a class to elements and style that class one time using CSS rules. D3 has the attr() method to add any HTML attribute to an element, including a class name.
+
+The attr() method works the same way that style() does. It takes comma-separated values, and can use a callback function. Here's an example to add a class of container to a selection:
+
+selection.attr("class", "container");
+Note that the class parameter will remain the same whenever you need to add a class and only the container parameter will change.
+
+Add the attr() method to the code in the editor and put a class of bar on the div elements.
+<style>
+  .bar {
+    width: 25px;
+    height: 100px;
+    display: inline-block;
+    background-color: blue;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    d3.select("body").selectAll("div")
+      .data(dataset)
+      .enter()
+      .append("div")
+      .attr("class", "bar")
+      // Add your code below this line
+
+
+
+      // Add your code above this line
+  </script>
+</body>
+
+----------------------------
+## Update the Height of an Element Dynamically
+The previous challenges covered how to display data from an array and how to add CSS classes. You can combine these lessons to create a simple bar chart. There are two steps to this:
+
+Create a div for each data point in the array
+
+Give each div a dynamic height, using a callback function in the style() method that sets height equal to the data value
+
+Recall the format to set a style using a callback function:
+
+selection.style("cssProperty", (d) => d)
+Add the style() method to the code in the editor to set the height property for each element. Use a callback function to return the value of the data point with the string px added to it.
+
+<style>
+  .bar {
+    width: 25px;
+    height: 100px;
+    display: inline-block;
+    background-color: blue;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    d3.select("body").selectAll("div")
+      .data(dataset)
+      .enter()
+      .append("div")
+      .attr("class", "bar")
+      // Add your code below this line
+      .style('height',(d)=>
+        `${d}px`
+  )
+
+
+      // Add your code above this line
+  </script>
+</body>
+
+
+-----------------
+## Change the Presentation of a Bar Chart
+The last challenge created a bar chart, but there are a couple of formatting changes that could improve it:
+
+Add space between each bar to visually separate them, which is done by adding a margin to the CSS for the bar class
+
+Increase the height of the bars to better show the difference in values, which is done by multiplying the value by a number to scale the height
+
+First, add a margin of 2px to the bar class in the style tag. Next, change the callback function in the style() method so it returns a value 10 times the original data value (plus the px).
+
+Note: Multiplying each data point by the same constant only alters the scale. It's like zooming in, and it doesn't change the meaning of the underlying data.
+
+<style>
+  .bar {
+    width: 25px;
+    height: 100px;
+    /* Add your code below this line */
+    margin: 2px;
+    
+    /* Add your code above this line */
+    display: inline-block;
+    background-color: blue;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    d3.select("body").selectAll("div")
+      .data(dataset)
+      .enter()
+      .append("div")
+      .attr("class", "bar")
+      .style("height", (d) => ((d*10) + "px")) // Change this line
+  </script>
+</body>
+---------------
+## Learn About SVG in D3
+SVG stands for Scalable Vector Graphics.
+
+Here "scalable" means that, if you zoom in or out on an object, it would not appear pixelated. It scales with the display system, whether it's on a small mobile screen or a large TV monitor.
+
+SVG is used to make common geometric shapes. Since D3 maps data into a visual representation, it uses SVG to create the shapes for the visualization. SVG shapes for a web page must go within an HTML svg tag.
+
+CSS can be scalable when styles use relative units (such as vh, vw, or percentages), but using SVG is more flexible to build data visualizations.
+
+Add an svg node to the body using append(). Give it a width attribute set to the provided w constant and a height attribute set to the provided h constant using the attr() or style() methods for each. You'll see it in the output because there's a background-color of pink applied to it in the style tag.
+
+Note: When using attr() width and height attributes do not have units. This is the building block of scaling - the element will always have a 5:1 width to height ratio, no matter what the zoom level is.
